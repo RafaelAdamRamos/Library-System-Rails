@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Fix bin permissions
+        run: chmod +x bin/*
+
+      - name: Run Rubocop
+        run: bin/rubocop -f github
+
+      - name: Run Brakeman
+        run: bin/brakeman --no-pager
+
+      - name: Importmap Audit
+        run: bin/importmap audit
+
+      - name: Run Tests
+        run: bin/rails db:test:prepare test
+
