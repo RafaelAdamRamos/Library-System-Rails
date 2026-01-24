@@ -2,51 +2,56 @@ module Authentication
   extend ActiveSupport::Concern
 
   included do
+    class_attribute :unauthenticated_actions, default: []
+
+    before_action :resume_session
     before_action :require_authentication
-    helper_method :authenticated?
   end
 
   class_methods do
-    def allow_unauthenticated_access(**options)
-      skip_before_action :require_authentication, **options
+    def allow_unauthenticated_access(only:)
+      self.unauthenticated_actions += Array(only).map(&:to_s)
     end
   end
 
   private
-    def authenticated?
-      resume_session
-    end
 
-    def require_authentication
-      resume_session || request_authentication
+  def resume_session
+    if (session_id = cookies.signed[:session_id])
+      Current.session = UserSession.find_by(id: session_id)
+      Current.user = Current.session&.user
     end
+  end
 
-    def resume_session
-      Current.session ||= find_session_by_cookie
-    end
+  def require_authentication
+    return if self.class.unauthenticated_actions.include?(action_name)
+    redirect_to new_session_path unless Current.user
+  end
 
-    def find_session_by_cookie
-      Session.find_by(id: cookies.signed[:session_id]) if cookies.signed[:session_id]
-    end
+  def start_new_session_for(user)
+    user_session = user.user_sessions.create!(
+      user_agent: request.user_agent,
+      ip_address: request.remote_ip
+    )
 
-    def request_authentication
-      session[:return_to_after_authenticating] = request.url
-      redirect_to new_session_path
-    end
+    Current.session = user_session
+    Current.user = user
 
-    def after_authentication_url
-      session.delete(:return_to_after_authenticating) || root_url
-    end
+    cookies.signed.permanent[:session_id] = {
+      value: user_session.id,
+      httponly: true,
+      same_site: :lax
+    }
+  end
 
-    def start_new_session_for(user)
-      user.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip).tap do |session|
-        Current.session = session
-        cookies.signed.permanent[:session_id] = { value: session.id, httponly: true, same_site: :lax }
-      end
-    end
+  def terminate_session
+    Current.session&.destroy
+    cookies.delete(:session_id)
+    Current.session = nil
+    Current.user = nil
+  end
 
-    def terminate_session
-      Current.session.destroy
-      cookies.delete(:session_id)
-    end
+  def after_authentication_url
+    root_path
+  end
 end

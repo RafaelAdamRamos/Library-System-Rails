@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_23_180312) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_24_220407) do
   create_table "book_copies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "book_id", null: false
     t.datetime "created_at", null: false
@@ -38,6 +38,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_23_180312) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "user_sessions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "ip_address"
+    t.datetime "updated_at", null: false
+    t.string "user_agent"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_user_sessions_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cpf", null: false
     t.datetime "created_at", null: false
@@ -52,4 +61,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_23_180312) do
 
   add_foreign_key "book_copies", "books"
   add_foreign_key "sessions", "users"
+  add_foreign_key "user_sessions", "users"
 end
