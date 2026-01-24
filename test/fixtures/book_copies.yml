@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  heritage_code: MyString
+  status: false
+  book: one
+
+two:
+  heritage_code: MyString
+  status: false
+  book: two

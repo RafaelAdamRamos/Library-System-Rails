@@ -1,0 +1,47 @@
+<%= form_with(model: loan) do |form| %>
+  <% if loan.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(loan.errors.count, "error") %> prohibited this loan from being saved:</h2>
+
+      <ul>
+        <% loan.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :borrowed_at, style: "display: block" %>
+    <%= form.date_field :borrowed_at %>
+  </div>
+
+  <div>
+    <%= form.label :expected_return_at, style: "display: block" %>
+    <%= form.date_field :expected_return_at %>
+  </div>
+
+  <div>
+    <%= form.label :returned_at, style: "display: block" %>
+    <%= form.date_field :returned_at %>
+  </div>
+
+  <div>
+    <%= form.label :fine_amount, style: "display: block" %>
+    <%= form.text_field :fine_amount %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :book_copy_id, style: "display: block" %>
+    <%= form.text_field :book_copy_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
