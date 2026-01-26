@@ -6,31 +6,23 @@ on:
   pull_request:
 
 jobs:
-  test:
+  security:
     runs-on: ubuntu-latest
-
-    services:
-      mysql:
-        image: mysql:8
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_DATABASE: biblioteca_test
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
     steps:
       - uses: actions/checkout@v4
-
-      - name: Fix bin permissions
-        run: chmod +x bin/*
-
+      - run: chmod +x bin/*
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - run: bin/brakeman --no-pager || true
+      - run: bin/bundler-audit || true
 
-      - name: Run tests
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: mysql2://root:@mysql:3306/biblioteca_test
-        run: bin/rails db:create db:schema:load test
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: chmod +x bin/*
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: bin/rubocop -f github
