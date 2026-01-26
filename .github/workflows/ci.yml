@@ -68,15 +68,17 @@ jobs:
         run: bin/rubocop -f github
 
   test:
-    runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-        ports: [ "3306:3306" ]
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+  runs-on: ubuntu-latest
+  services:
+    mysql:
+      image: mysql:8
+      env:
+        MYSQL_ALLOW_EMPTY_PASSWORD: true
+        MYSQL_DATABASE: biblioteca_test
+      ports:
+        - 3306:3306
 
+      
     steps:
       - name: Install packages
         run: sudo apt-get update && sudo apt-get install -y default-libmysqlclient-dev node-gyp
@@ -97,14 +99,16 @@ jobs:
         run: bin/rails db:drop db:create db:migrate test
 
   system-test:
-    runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-        ports: [ "3306:3306" ]
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+  runs-on: ubuntu-latest
+  services:
+    mysql:
+      image: mysql:8
+      env:
+        MYSQL_ALLOW_EMPTY_PASSWORD: true
+        MYSQL_DATABASE: biblioteca_test
+      ports:
+        - 3306:3306
+
 
     steps:
       - name: Install packages
