@@ -37,7 +37,8 @@ jobs:
           bundler-cache: true
 
       - name: Scan JS dependencies
-        run: bin/importmap audit
+        run: bundle exec rails importmap:audit
+
 
   lint:
     runs-on: ubuntu-latest
