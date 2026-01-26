@@ -32,5 +32,5 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: mysql2://root@127.0.0.1:3306/biblioteca_test
+          DATABASE_URL: mysql2://root:@mysql:3306/biblioteca_test
         run: bin/rails db:create db:schema:load test
