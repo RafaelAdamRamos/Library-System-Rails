@@ -111,7 +111,8 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y default-libmysqlclient-dev node-gyp
 
       - name: Install Chrome
-        run: sudo apt-get install -y chromium-browser
+        run: sudo apt-get install -y chromium
+
 
       - uses: actions/checkout@v4
 
@@ -125,7 +126,7 @@ jobs:
       - name: Run system tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: mysql2://root@127.0.0.1:3306/test
+          DATABASE_URL: mysql2://root@127.0.0.1:3306
         run: bin/rails db:drop db:create db:migrate test:system
 
       - name: Upload screenshots on failure
