@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  allow_unauthenticated_access only: %i[new create]
   before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
@@ -63,8 +64,10 @@ class UsersController < ApplicationController
       @user = User.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.expect(user: [ :name, :cpf, :email, :user_type, :password_digest ])
-    end
+   # Only allow a list of trusted parameters through.
+   def user_params
+  permitted = [ :name, :cpf, :email_address, :password ]
+  permitted << :user_type if current_user&.admin?
+  params.require(:user).permit(permitted)
+   end
 end

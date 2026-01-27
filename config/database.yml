@@ -6,8 +6,8 @@
 # Ensure the MySQL gem is defined in your Gemfile
 #   gem "mysql2"
 #
-# And be sure to use new-style password hashing:
-#   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
+# And be sure to use new-style password_digest hashing:
+#   https://dev.mysql.com/doc/refman/5.7/en/password_digest-hashing.html
 #
 default: &default
   adapter: mysql2
@@ -29,10 +29,10 @@ test:
   database: biblioteca_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
-# like your database password, in your source code. If your source code is
+# like your database password_digest, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
 #
-# Instead, provide the password or a full connection URL as an environment
+# Instead, provide the password_digest or a full connection URL as an environment
 # variable when you boot the app. For example:
 #
 #   DATABASE_URL="mysql2://myuser:mypass@localhost/somedatabase"

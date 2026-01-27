@@ -32,8 +32,8 @@ registry:
   # Needed for authenticated registries.
   # username: your-user
 
-  # Always use an access token rather than real password when possible.
-  # password:
+  # Always use an access token rather than real password_digest when possible.
+  # password_digest:
   #   - KAMAL_REGISTRY_PASSWORD
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
@@ -64,7 +64,7 @@ aliases:
   console: app exec --interactive --reuse "bin/rails console"
   shell: app exec --interactive --reuse "bash"
   logs: app logs -f
-  dbc: app exec --interactive --reuse "bin/rails dbconsole --include-password"
+  dbc: app exec --interactive --reuse "bin/rails dbconsole --include-password_digest"
 
 # Use a persistent storage volume for sqlite database files and local Active Storage files.
 # Recommended to change this to a mounted volume path that is backed up off server.

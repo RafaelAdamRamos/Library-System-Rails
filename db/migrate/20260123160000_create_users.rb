@@ -11,5 +11,7 @@ class CreateUsers < ActiveRecord::Migration[8.1]
     end
     add_index :users, :email_address, unique: true
     add_index :users, :cpf, unique: true
+    change_column_null :users, :user_type, false
+    change_column_default :users, :user_type, "user"
   end
 end
