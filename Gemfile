@@ -59,6 +59,7 @@ group :development do
   gem "web-console"
   # HTML beautifier for ERB formatting
   gem "htmlbeautifier"
+  gem "rufo"
 end
 
 group :test do
@@ -67,6 +68,3 @@ group :test do
   gem "selenium-webdriver"
 end
 
-group :development do
-  gem "rufo"
-end
