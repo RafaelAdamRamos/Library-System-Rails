@@ -1,96 +1,89 @@
 # Library System (Ruby on Rails)
 
-> 🚧 **Projeto em desenvolvimento**  
-> Este projeto está em **desenvolvimento ativo**. Algumas funcionalidades podem estar incompletas, sofrer alterações ou ainda não estarem disponíveis.  
-> Não é recomendado para uso em produção no estado atual.
+> 🚧 **Project in development**  
+> This project is in **active development**. Some features may be incomplete, subject to changes, or not yet available.  
+> It is not recommended for production use in its current state.
 
-## Descrição
+## Description
 
-Este é um **sistema de biblioteca em desenvolvimento**, cujo objetivo é permitir o gerenciamento de livros, usuários e empréstimos de forma centralizada.
+This is a **library system under development**, whose goal is to allow centralized management of books, users, and loans.
 
-O sistema foi idealizado para que gerentes possam administrar o acervo e os empréstimos, enquanto usuários podem consultar livros disponíveis e solicitar empréstimos de forma simples.
+The system was designed so that managers can manage the collection and loans, while users can browse available books and request loans in a simple way.
 
-## Funcionalidades
+## Features
 
-### Gerente
-- Cadastro e gerenciamento de livros
-- Gerenciamento de usuários
-- Aprovação e confirmação de devoluções
-- Aplicação de multa em caso de atraso
-- Recebimento de alertas sobre prazos de empréstimo
+### Manager
+- Book registration and management
+- User management
+- Approval and confirmation of returns
+- Application of fines in case of delay
+- Receiving alerts about loan deadlines
 
-### Usuário
-- Visualização da lista de livros disponíveis
-- Pesquisa e filtro de livros por categoria
-- Solicitação de empréstimo
-- Indicação de devolução do livro no sistema
-- Recebimento de alertas sobre o fim do período de empréstimo
+### User
+- Viewing the list of available books
+- Searching and filtering books by category
+- Requesting a loan
+- Indicating book return in the system
+- Receiving alerts about the end of the loan period
 
-## Fluxo de Empréstimo
-1. O usuário solicita o empréstimo de um livro.
-2. O sistema controla o período do empréstimo.
-3. Próximo ao vencimento, alertas são enviados ao usuário e ao gerente.
-4. O usuário informa a devolução pelo sistema.
-5. O gerente confirma a devolução.
-6. Em caso de atraso ou conflito, uma multa é aplicada automaticamente após o prazo final.
+## Loan Flow
+1. The user requests a book loan.
+2. The system controls the loan period.
+3. Close to the due date, alerts are sent to the user and the manager.
+4. The user informs the return through the system.
+5. The manager confirms the return.
+6. In case of delay or conflict, a fine is automatically applied after the final deadline.
 
-## Status do Projeto
-- Estrutura inicial do sistema em desenvolvimento
-- Funcionalidades básicas de cadastro em implementação
-- Sistema de empréstimos em evolução
-- Sistema de notificações planejado
+## Project Status
+- Initial system structure under development
+- Basic registration features under implementation
+- Loan system in evolution
+- Notification system planned
 
-## Funcionalidades Planejadas
-- Sistema de autenticação e controle de permissões
-- Notificações automáticas de vencimento de empréstimos
-- Sistema de multas por atraso
-- Histórico de empréstimos por usuário
-- Melhoria na organização e validações do sistema
+## Planned Features
+- Authentication and permission control system
+- Automatic loan due date notifications
+- Late fee system
+- Loan history per user
+- Improvements in system organization and validations
 
-## Tecnologias Utilizadas
+## Technologies Used
 - Ruby on Rails
-- Banco de dados relacional
+- Relational database
 - HTML / ERB
 
-## Requisitos
+## Requirements
 - Ruby **3.4.7**
 
-## Como executar o projeto
-1. Clone o repositório:
-   ```bash
+## How to run the project
+1. Clone the repository:
+```bash
    git clone https://github.com/RafaelAdamRamos/Library-System-Rails.git
+````
+2. Access the project directory:
+```
+cd Library-System-Rails
+```
 
-2. Acesse o diretório do projeto:
+3. Install dependencies:
+```
+bundle install
+```
 
-   ```bash
-   cd Library-System-Rails
-   ```
+4. Set up the database:
+```
+rails db:create db:migrate
+````
 
-3. Instale as dependências:
+5. Start the server:
+```
+rails server
+```
 
-   ```bash
-   bundle install
-   ```
+6. Access in the browser:
 
-4. Configure o banco de dados:
+http://localhost:3000
 
-   ```bash
-   rails db:create db:migrate
-   ```
-
-5. Inicie o servidor:
-
-   ```bash
-   rails server
-   ```
-
-6. Acesse no navegador:
-
-   ```
-   http://localhost:3000
-   ```
-
-## Observações
-
-* Projeto desenvolvido para fins de estudo e aprendizado
-* Estrutura, funcionalidades e decisões técnicas podem mudar ao longo do desenvolvimento
+## Notes
+- Project developed for study and learning purposes
+- Structure, features, and technical decisions may change throughout development
