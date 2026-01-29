@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      user: "Usuário"
+    attributes:
+      user:
+        user_type: "Tipo do usuário"
+        email: "E-mail"
+  helpers:
+    submit:
+      user:
+        create: "Criar Usuário"
+        update: "Atualizar Usuário"
+  errors:
+    messages:
+      blank: "não pode ficar em branco"

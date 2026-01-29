@@ -22,6 +22,11 @@
     <%= render "shared/navbar" %>
   <% end %>
   <body>
+    <% flash.each do |key, message| %>
+      <div class="alert <%= "alert-danger" if key == "alert" %> <%= "alert-success" if key == "notice" %>">
+        <%= message %>
+      </div>
+    <% end %>
     <%= yield %>
     <!-- Bootstrap JS (com Popper incluso) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

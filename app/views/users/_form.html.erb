@@ -24,7 +24,7 @@
   <% if current_user&.admin? %>
     <div>
       <%= form.label :user_type, style: "display: block" %>
-      <%= form.text_field :user_type %>
+      <%= form.select :user_type, ["admin", "user"] %>
     </div>
   <% end %>
   <div>
