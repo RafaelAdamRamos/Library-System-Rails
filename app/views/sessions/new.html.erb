@@ -4,12 +4,12 @@
 <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
 
 <%= form_with url: session_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %><br>
-  <%= form.submit "Sign in" %>
+  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Insira seu email", value: params[:email_address] %><br>
+  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Insira sua senha", maxlength: 72 %><br>
+  <%= form.submit "Login" %>
 <% end %>
 <br>
 
-<%= link_to "Forgot password?", new_password_path %>
+<%= link_to "Esqueceu a senha?", new_password_path %>
 <%= link_to "Cadastre-se", new_user_path%>
 </div>

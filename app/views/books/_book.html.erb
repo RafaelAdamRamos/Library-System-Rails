@@ -1,11 +1,18 @@
 <div id="<%= dom_id book %>">
+
+<% if book.cover.attached? %>
+  <%= image_tag book.cover.variant(resize_to_limit: [300, 400]).processed , class: "img-fluid rounded shadow" %>
+<% else %>
+  <p>Sem capa</p>
+<% end %>
+
   <div>
-    <strong>Title:</strong>
+    <strong>Titulo:</strong>
     <%= book.title %>
   </div>
 
   <div>
-    <strong>Author:</strong>
+    <strong>Autor:</strong>
     <%= book.author %>
   </div>
 
@@ -15,7 +22,7 @@
   </div>
 
   <div>
-    <strong>Publisher:</strong>
+    <strong>Editora:</strong>
     <%= book.publisher %>
   </div>
 

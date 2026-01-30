@@ -2,10 +2,18 @@ pt-BR:
   activerecord:
     models:
       user: "Usuário"
+      books: "Livro"
     attributes:
       user:
-        user_type: "Tipo do usuário"
-        email: "E-mail"
+        name: "Nome"
+        cpf: "CPF"
+        email_address: "Email"
+        password: "Senha"
+        user_type: "Tipo de usuário"
+      books:
+        title: "Título"
+        author: "Autor"
+        publisher: "Editora"
   helpers:
     submit:
       user:

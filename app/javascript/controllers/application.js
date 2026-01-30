@@ -1,9 +1,10 @@
+// app/javascript/controllers/application.js
 import { Application } from "@hotwired/stimulus"
 
 const application = Application.start()
+application.debug = true
+window.Stimulus = application
 
-// Configure Stimulus development experience
-application.debug = false
-window.Stimulus   = application
+console.log("✅ Stimulus iniciado")
 
 export { application }

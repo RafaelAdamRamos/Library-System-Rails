@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   before_action :require_admin
   before_action :set_book, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token, only: [:search_cover, :apply_cover]
 
   # GET /books or /books.json
   def index
@@ -26,7 +27,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: "Book was successfully created." }
+        format.html { redirect_to @book, notice: "O livro foi cadastrado com sucesso!" }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,6 +59,48 @@ class BooksController < ApplicationController
     end
   end
 
+  # GET /books/search_cover
+  def search_cover
+    service = GoogleBooksCoverSearch.new(
+      title: params[:title],
+      author: params[:author],
+      publisher: params[:publisher]
+    )
+
+    cover_url = service.call
+
+    render json: { cover_url: cover_url }
+  end
+
+  # GET /books/proxy_image - Baixa imagem e retorna como base64 para evitar CORS
+  def proxy_image
+    require 'open-uri'
+    
+    image_data = URI.open(params[:url]).read
+    base64_image = Base64.strict_encode64(image_data)
+    
+    render json: { 
+      data: "data:image/jpeg;base64,#{base64_image}",
+      filename: "cover.jpg"
+    }
+  rescue => e
+    render json: { error: e.message }, status: :unprocessable_entity
+  end
+
+  # POST /books/apply_cover
+  def apply_cover
+    book = Book.find(params[:id])
+    file = URI.open(params[:cover_url])
+
+    book.cover.attach(
+      io: file,
+      filename: "cover.jpg",
+      content_type: "image/jpeg"
+    )
+
+    render json: { success: true, message: "Capa aplicada com sucesso!" }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
@@ -66,12 +109,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.expect(book: [ :title, :author, :isbn, :publisher ])
-    end
-
-    def require_admin
-    unless current_user&.admin?
-      redirect_to root_path, alert: "Você não tem permissão para acessar essa página."
-    end
+      params.expect(book: [ :cover, :title, :author, :isbn, :publisher ])
     end
 end

@@ -34,12 +34,19 @@
         <% end %>
       </ul>
 
-      <!-- Botão logout à direita -->
+      <!-- Botões à direita -->
       <div class="ms-auto">
         <% if logged_in? %>
-          <%= button_to "Log out", session_path, method: :delete, class: "btn btn-outline-danger" %>
+          <%= button_to "Log out", session_path, method: :delete, class: "btn btn-outline-danger" %>          
         <% end %>
       </div>
+
+      <div class="ms-2">
+        <% if logged_in? %>
+          <%= link_to "Meu usuário", profile_path, class: "nav-link" %>          
+        <% end %>
+      </div>
+
 
     </div>
   </div>

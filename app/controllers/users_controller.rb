@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: %i[new create]
   before_action :set_user, only: %i[ show edit update destroy ]
-
+  before_action :require_admin, except: %i[new create edit]
   # GET /users or /users.json
   def index
     @users = User.all
@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    @user = current_user
   end
 
   # GET /users/new

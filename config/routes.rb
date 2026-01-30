@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
   resource :session
+  resource :profile, only: :show
+  resources :books do
+    collection do
+      get :search_cover
+      get :proxy_image
+      post :apply_cover
+    end
+  end
   resources :passwords, param: :token
   resources :loans
   resources :users
