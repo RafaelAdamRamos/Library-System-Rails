@@ -51,6 +51,8 @@ The system was designed so that managers can manage the collection and loans, wh
 - Ruby on Rails
 - Relational database
 - HTML / ERB
+- Bootstrap
+- ImageMagick
 
 ## Requirements
 - Ruby **3.4.7**
