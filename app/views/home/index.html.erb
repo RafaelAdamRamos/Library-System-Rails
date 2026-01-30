@@ -1,0 +1,12 @@
+<body>
+  <h1>Bem vindo à biblioteca</h1>
+  <h2>Qual livro te interessa no momento?</h2>
+  <div id="books">
+    <% @books.each do |book| %>
+      <%= render book %>
+      <p>
+        <%= link_to "Ver livro", book %>
+      </p>
+    <% end %>
+  </div>
+</body>

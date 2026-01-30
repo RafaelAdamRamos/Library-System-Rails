@@ -3,8 +3,10 @@
 <%= render @book %>
 
 <div>
+  <% if current_user&.admin? %>
   <%= link_to "Editar livro", edit_book_path(@book) %> |
-  <%= link_to "Voltar", books_path %>
+  <% end %>
+  <%= link_to "Voltar", request.referer || home_path, class: "btn btn-secondary" %>
 
   <%= button_to "Deletar Livro", @book, method: :delete %>
 </div>
