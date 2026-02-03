@@ -1,12 +1,12 @@
 <body>
   <h1>Bem vindo à biblioteca</h1>
   <h2>Qual livro te interessa no momento?</h2>
-  <div id="books">
+  <div id="books" class="row row-cols-3">
     <% @books.each do |book| %>
-      <%= render book %>
-      <p>
-        <%= link_to "Ver livro", book %>
-      </p>
+    <div class="col d-flex" style="justify-content: end; flex-direction: column;">
+      <%= render book, show_details: false %>
+      <%= link_to "Ver livro", book %>
+    </div>
     <% end %>
   </div>
 </body>
