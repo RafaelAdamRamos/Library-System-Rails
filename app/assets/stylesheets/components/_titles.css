@@ -1,0 +1,14 @@
+.title {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body {
+  background: red;
+}

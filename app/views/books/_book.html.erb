@@ -1,31 +1,27 @@
 <div id="<%= dom_id book %>">
-
-<% if book.cover.attached? %>
-  <%= image_tag book.cover.variant(resize_to_limit: [300, 400]).processed , class: "img-fluid shadow" %>
-<% else %>
-  <p>Sem capa</p>
-<% end %>
-
-  <div class="d-flex">
+  <% if book.cover.attached? %>
+    <div class="cover">
+      <%= image_tag book.cover.variant(resize_to_limit: [300, 400]).processed , class: "img-fluid shadow" %>
+    </div>
+  <% else %>
+    <p>Sem capa</p>
+  <% end %>
+  <div class="title">
     <strong>Titulo:</strong>
-    <%= book.title %>
-  </div>
-
-  <div>
-    <strong>Autor:</strong>
-    <%= book.author %>
-  </div>
-
-<% if show_details %>
-  <div>
-    <strong>Isbn:</strong>
-    <%= book.isbn %>
-  </div>
-
-  <div>
-    <strong>Editora:</strong>
-    <%= book.publisher %>
-  </div>
-<% end %>
-
-</div>
+    <span class="title-text"><%= book.title %><span>
+      </div>
+      <div>
+        <strong>Autor:</strong>
+        <%= book.author %>
+      </div>
+      <% if show_details %>
+        <div>
+          <strong>Isbn:</strong>
+          <%= book.isbn %>
+        </div>
+        <div>
+          <strong>Editora:</strong>
+          <%= book.publisher %>
+        </div>
+      <% end %>
+    </div>
